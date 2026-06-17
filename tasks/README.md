@@ -11,10 +11,16 @@ Cipher writes task briefs here. Claude Code reads them, implements, and drops a 
 
 | # | Task | Status | Owner | Brief |
 |---|------|--------|-------|-------|
-| 01 | Hash embedding / anti-deepfake floating badge | 🔵 READY | Cipher | [TASK-01-hash-embedding.md](TASK-01-hash-embedding.md) |
+| 01 | Hash embedding / anti-deepfake floating badge | 🟡 HOLD | Cipher | [TASK-01-hash-embedding.md](TASK-01-hash-embedding.md) |
+| 02 | Fix ABI drift between contract source and inlined ABI | 🔵 READY | Claude Code | [TASK-02-fix-abi-drift.md](TASK-02-fix-abi-drift.md) |
+| 03 | Fix verification URL to include contract address | 🔵 READY | Claude Code | [TASK-03-fix-verify-url.md](TASK-03-fix-verify-url.md) |
+| 04 | Fix wrong "MetaMask" copy for Privy embedded wallet users | 🔵 READY | Claude Code | [TASK-04-fix-enrollment-copy.md](TASK-04-fix-enrollment-copy.md) |
+| 05 | Write verification_method/strength on OAuth return | 🔵 READY | Claude Code | [TASK-05-fix-oauth-supabase-write.md](TASK-05-fix-oauth-supabase-write.md) |
+| 06 | Tighten Supabase RLS on social_profiles and signed_content | 🔵 READY | Claude Code | [TASK-06-fix-supabase-rls.md](TASK-06-fix-supabase-rls.md) |
 
 Status legend:
 - 🟡 BRIEF NEEDED — placeholder exists, Cipher needs to write actual acceptance criteria
+- 🟡 HOLD — deferred pending higher-priority tasks landing first
 - 🔵 READY — brief is complete, Claude Code can start
 - 🟠 IN PROGRESS — Claude Code is actively implementing
 - 🟢 DONE — completion report shipped
