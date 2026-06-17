@@ -11,7 +11,7 @@ Cipher writes task briefs here. Claude Code reads them, implements, and drops a 
 
 | # | Task | Status | Owner | Brief |
 |---|------|--------|-------|-------|
-| 01 | Hash embedding / anti-deepfake floating badge | 🟡 BRIEF NEEDED | Cipher | [TASK-01-hash-embedding.md](TASK-01-hash-embedding.md) |
+| 01 | Hash embedding / anti-deepfake floating badge | 🔵 READY | Cipher | [TASK-01-hash-embedding.md](TASK-01-hash-embedding.md) |
 
 Status legend:
 - 🟡 BRIEF NEEDED — placeholder exists, Cipher needs to write actual acceptance criteria
