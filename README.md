@@ -58,3 +58,39 @@ This repo is **NOT** connected to any Vercel project. That's deliberate — Ciph
 - **Write:** add to GitHub repo as a collaborator with **Write**, OR add an SSH deploy key with "Allow write access" ticked
 
 Cipher and Claude Code each have their own SSH deploy key on this repo for isolated, revocable access.
+
+---
+
+## Automation: Claude polls this repo every 10 min
+
+A launchd agent on Gandelf7's MacBook runs `~/bin/claude-poll.sh` every 600 seconds. The script:
+
+1. `git pull --rebase` this repo
+2. Finds `tasks/TASK-NN-*.md` briefs that have **no matching `_DONE.md` or `_CLARIFY.md`** AND status is `🔵 READY` or `🟠 IN PROGRESS`
+3. For each pending brief, invokes Claude Code in headless mode (`claude --print --dangerously-skip-permissions`) with an ambiguity-check-first prompt
+4. If brief is ambiguous → writes `tasks/TASK-NN-*_CLARIFY.md` with questions, pushes, stops on that brief
+5. If brief is clear → implements per the brief, deploys if needed, writes `tasks/TASK-NN-*_DONE.md`, pushes
+
+**Cipher should also poll** (separate process) to:
+- Pick up new `_CLARIFY.md` files and either update the brief with clarifications or escalate to Gandelf7
+- Pick up new `_DONE.md` files and update `tracker.json` + `CIPHER_CONTEXT.md`
+
+**Operating commands** (on Gandelf7's machine):
+
+| Command | What it does |
+|---|---|
+| `claude-poll-status` | Show last 40 lines of `~/.claude-poll.log` |
+| `claude-poll-tail` | Live-tail the log |
+| `claude-poll-now` | Force a poll right now (skips the 10-min wait) |
+| `claude-poll-stop` | Disable the launch agent |
+| `claude-poll-start` | Re-enable the launch agent |
+
+**Files:**
+- Script: `/Users/certainid/bin/claude-poll.sh`
+- Launch agent: `~/Library/LaunchAgents/com.certainid.claude-poll.plist`
+- Log: `~/.claude-poll.log` (gitignored)
+
+**Failure isolation:**
+- Each brief runs in its own `claude --print` invocation; one task failing does not block the next
+- A flock-style mutex prevents overlapping ticks (so a slow task can't be double-dispatched)
+- Pre-flight check refuses to dispatch if `git user.email` is anything other than `certainIDofficial@gmail.com` — protects the Vercel collaboration rule
