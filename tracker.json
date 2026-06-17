@@ -1,0 +1,83 @@
+{
+  "_comment": "Cipher's structured ops tracker. Cipher owns this file. Claude Code reads it for situational awareness but does NOT write to it — completion reports in tasks/TASK-<NN>_DONE.md are how Claude Code communicates back.",
+  "last_updated": "2026-06-17",
+  "last_updated_by": "claude-code (initial scaffold)",
+  "sprint": {
+    "name": "Pre-alpha hardening",
+    "started": "_Cipher fills in_",
+    "ends": "_Cipher fills in_",
+    "goal": "_Cipher fills in_"
+  },
+  "build_progress": {
+    "main_app": {
+      "url": "https://app.certainid.io",
+      "status": "live",
+      "notes": "OAuth flows live for LinkedIn; GitHub/X/YouTube endpoints deployed, awaiting credentials"
+    },
+    "family_app": {
+      "url": "https://family.certainid.io",
+      "status": "live",
+      "notes": "Parent onboarding fixed; child invite flow working"
+    },
+    "mobile_pwa": {
+      "url": "https://m.certainid.io",
+      "status": "live",
+      "notes": "Timeouts + camera-denied fallback shipped"
+    },
+    "marketing_site": {
+      "url": "https://www.certainid.io",
+      "status": "live",
+      "notes": "Astro migration done; blog at /blog with 1 post live"
+    },
+    "browser_extension": {
+      "status": "built, not in store",
+      "notes": "Install-via-developer-mode only; Chrome Web Store submission outstanding"
+    }
+  },
+  "kpis": {
+    "alpha_users": 0,
+    "blog_posts_published": 1,
+    "social_profiles_oauth_ready": ["linkedin"],
+    "social_profiles_oauth_pending": ["github", "twitter", "youtube"],
+    "relayer_balance_matic": 0.2
+  },
+  "blockers": [
+    {
+      "id": "OAUTH-CREDS",
+      "description": "Need Gandelf7 to register GitHub, Google, and X OAuth apps and provide client_id + secret for each",
+      "blocks": ["full OAuth coverage on Profiles tab"],
+      "owner": "gandelf7"
+    },
+    {
+      "id": "RELAYER-FUNDING",
+      "description": "Relayer wallet 0x9DF7Ccc1A560303520D138e14ef6bDD15f364249 at 0.2 MATIC — enough for current cohort but not a second one",
+      "blocks": ["second alpha cohort"],
+      "owner": "gandelf7"
+    },
+    {
+      "id": "META-OAUTH-APPROVAL",
+      "description": "Instagram, TikTok, Facebook OAuth blocked by platform product approvals (1-3 weeks each)",
+      "blocks": ["real verification on those platforms"],
+      "owner": "gandelf7"
+    }
+  ],
+  "active_tasks": [
+    {
+      "id": "TASK-01",
+      "slug": "hash-embedding",
+      "title": "Hash embedding / anti-deepfake floating badge",
+      "status": "brief-needed",
+      "priority": "P0"
+    }
+  ],
+  "content_pipeline": {
+    "blog_backlog": "see certainid-marketing/calendar/backlog.md",
+    "blog_published_this_week": 0,
+    "next_post_target": "_Cipher tracks_"
+  },
+  "social_queue": {
+    "x": [],
+    "linkedin": [],
+    "notes": "Cipher manages via Blotato API"
+  }
+}
