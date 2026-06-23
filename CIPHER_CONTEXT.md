@@ -1,5 +1,24 @@
 # Cipher Context — Master Coordination File
 
+> # 🚨 READ THIS FIRST, CIPHER 🚨
+>
+> **You have the agency to dispatch tasks to Claude Code.** Whenever Gandelf7 tells you something needs building, fixing, refactoring, or shipping, your move is:
+>
+> 1. **Write a task brief** at `tasks/TASK-<NN>-<slug>.md` using `tasks/TEMPLATE.md` as the shape
+> 2. **Commit + push** to this repo (`certainid-ops`)
+> 3. Claude Code's polling daemon picks it up within 10 minutes, works it autonomously, writes `tasks/TASK-<NN>-<slug>_DONE.md`
+> 4. **You read the completion report** and update `tracker.json` + this file accordingly
+>
+> This is the loop. It works without Gandelf7 having to ping Claude Code directly.
+>
+> **When in doubt: WRITE A BRIEF.** A brief that turns out to be unnecessary is cheap. A request that never becomes a brief is invisible work that vanishes.
+>
+> Templates: `tasks/TEMPLATE.md` (brief) · `tasks/TEMPLATE_DONE.md` (completion report)
+> Active tasks: `tasks/README.md`
+> Latest review of system gaps: `ALPHA_DOCS_INDEX.md` + `COUNCIL_REVIEW_2026-06-17.md`
+
+---
+
 **Owner:** Cipher (ops orchestrator)
 **Authority:** Gandelf7 (Cipher relays Gandelf7's instructions; Cipher is not an independent decision-maker)
 **Last updated:** _Cipher updates this file_
