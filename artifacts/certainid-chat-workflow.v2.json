@@ -1,0 +1,177 @@
+{
+  "name": "CertainID Chat Assistant",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "chat",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "webhook-trigger",
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1.1,
+      "position": [
+        240,
+        300
+      ],
+      "webhookId": "certainid-chat"
+    },
+    {
+      "parameters": {
+        "authentication": "oAuth2",
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1kaW1P0x5ssU-Y3G9ECL9QAUBbhM0eH5z"
+        },
+        "options": {}
+      },
+      "id": "fetch-knowledge-base",
+      "name": "Fetch Knowledge Base",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        460,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Build Claude messages with session memory + proper system/messages split.\n// Memory lives in n8n's workflow-global staticData, keyed by sessionId.\n// We trim to last 20 messages (10 turns) to keep context window bounded.\n\nconst MAX_HISTORY_MESSAGES = 20;\n\n// \u2500\u2500 1. Inputs \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nconst inputItem = $input.first();\nconst body = inputItem.json.body || inputItem.json;\nconst userMessage = (body.message || '').toString().trim();\nconst sessionId = (body.sessionId || body.session_id || '').toString().trim();\n\nif (!userMessage) {\n  throw new Error('No user message provided in webhook body');\n}\nif (!sessionId) {\n  // No sessionId means fresh conversation. Generate one; client must echo it back next turn.\n  // (Alternative: reject the request and force the client to provide one.)\n}\nconst effectiveSessionId = sessionId || `anon-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;\n\n// \u2500\u2500 2. Knowledge base \u2014 read from the Drive node's binary output \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nlet knowledgeBase = '';\nif (inputItem.binary && inputItem.binary.data) {\n  knowledgeBase = Buffer.from(inputItem.binary.data.data, 'base64').toString('utf-8');\n} else {\n  // Fall back to empty KB rather than failing \u2014 assistant can still answer generally.\n  knowledgeBase = '(Knowledge base unavailable \u2014 answer from general knowledge and refer the user to hello@certainid.io)';\n}\n\n// \u2500\u2500 3. Conversation memory \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nconst staticData = $getWorkflowStaticData('global');\nif (!staticData.sessions) staticData.sessions = {};\nconst session = staticData.sessions[effectiveSessionId] || { messages: [], lastSeen: 0 };\n\n// Trim very old sessions (>24h) to prevent unbounded growth.\nconst now = Date.now();\nfor (const sid of Object.keys(staticData.sessions)) {\n  if (now - (staticData.sessions[sid].lastSeen || 0) > 24 * 60 * 60 * 1000) {\n    delete staticData.sessions[sid];\n  }\n}\n\n// \u2500\u2500 4. Build messages array (history + current user turn) \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\nconst history = (session.messages || []).slice(-MAX_HISTORY_MESSAGES);\nconst messages = [...history, { role: 'user', content: userMessage }];\n\n// \u2500\u2500 5. System prompt \u2014 KB lives here (not in user message); enables prompt caching \u2500\nconst systemPrompt = `You are CertainID's helpful concierge \u2014 a friendly, knowledgeable assistant who explains the product in plain English. CertainID is a privacy-first biometric identity verification platform that uses blockchain to combat deepfakes.\n\nGUIDELINES:\n- Speak conversationally. Do not read lists aloud \u2014 turn them into natural sentences.\n- Be concise. Two or three sentences for simple questions; longer only when the user asks for detail.\n- If the user asks about something not in the knowledge base, give a brief general answer and suggest they email hello@certainid.io for specifics. Do not invent details.\n- Maintain the conversation thread. Reference what the user said earlier when relevant.\n- Never break character or mention that you are an AI, Claude, or a chatbot unless the user directly asks.\n\nKNOWLEDGE BASE:\n${knowledgeBase}`;\n\nreturn {\n  systemPrompt,\n  messages,\n  sessionId: effectiveSessionId,\n  userMessage,\n};"
+      },
+      "id": "build-messages",
+      "name": "Build Claude Messages",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        680,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "anthropicApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ {\n  \"model\": \"claude-sonnet-4-20250514\",\n  \"max_tokens\": 1024,\n  \"system\": [\n    {\n      \"type\": \"text\",\n      \"text\": $json.systemPrompt,\n      \"cache_control\": { \"type\": \"ephemeral\" }\n    }\n  ],\n  \"messages\": $json.messages\n} }}",
+        "options": {}
+      },
+      "id": "call-claude",
+      "name": "Call Claude API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Persist this turn to session memory, format the response for the webhook.\n\nconst apiResponse = $input.first().json;\nconst assistantMessage = apiResponse.content && apiResponse.content[0] && apiResponse.content[0].text\n  ? apiResponse.content[0].text\n  : '(Assistant returned no text \u2014 please try again)';\n\n// Recover the sessionId + user message from the Build Messages node.\nconst built = $('Build Claude Messages').first().json;\nconst sessionId = built.sessionId;\nconst userMessage = built.userMessage;\n\n// Append this turn to staticData.\nconst staticData = $getWorkflowStaticData('global');\nif (!staticData.sessions) staticData.sessions = {};\nif (!staticData.sessions[sessionId]) staticData.sessions[sessionId] = { messages: [], lastSeen: 0 };\nstaticData.sessions[sessionId].messages.push(\n  { role: 'user', content: userMessage },\n  { role: 'assistant', content: assistantMessage }\n);\nstaticData.sessions[sessionId].lastSeen = Date.now();\n\n// Trim \u2014 keep last 20 messages (10 turns) max per session.\nconst MAX = 20;\nif (staticData.sessions[sessionId].messages.length > MAX) {\n  staticData.sessions[sessionId].messages = staticData.sessions[sessionId].messages.slice(-MAX);\n}\n\nreturn {\n  message: assistantMessage,\n  sessionId,\n  timestamp: new Date().toISOString(),\n};"
+      },
+      "id": "format-response",
+      "name": "Save Memory & Format",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1120,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { \"response\": $json.message, \"sessionId\": $json.sessionId, \"timestamp\": $json.timestamp } }}"
+      },
+      "id": "respond-webhook",
+      "name": "Respond to Webhook",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1,
+      "position": [
+        1340,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Fetch Knowledge Base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Knowledge Base": {
+      "main": [
+        [
+          {
+            "node": "Build Claude Messages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Claude Messages": {
+      "main": [
+        [
+          {
+            "node": "Call Claude API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call Claude API": {
+      "main": [
+        [
+          {
+            "node": "Save Memory & Format",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Memory & Format": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "staticData": null,
+  "tags": [],
+  "triggerCount": 0,
+  "updatedAt": "2026-06-28T00:00:00.000Z",
+  "versionId": "2"
+}
