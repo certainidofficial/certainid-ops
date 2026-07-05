@@ -35,7 +35,7 @@ Publish the blog post to certainid.io/blog as the anchor piece for a 7-day marke
 
 - `certainid-official/src/content/blog/<slug>.md`
 - `certainid-official/` repo
-- Blog post content at `/tmp/certainid-blog-biometric-blindspot.md` (copy from there)
+- Blog post content at `artifacts/certainid-blog-biometric-blindspot.md` (in this repo)
 
 ## Git / deploy
 

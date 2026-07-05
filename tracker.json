@@ -1,12 +1,12 @@
 {
   "_comment": "Cipher's structured ops tracker. Cipher owns this file. Claude Code reads it for situational awareness but does NOT write to it — completion reports in tasks/TASK-<NN>_DONE.md are how Claude Code communicates back.",
-  "last_updated": "2026-06-17",
-  "last_updated_by": "claude-code (initial scaffold)",
+  "last_updated": "2026-07-06",
+  "last_updated_by": "cipher",
   "sprint": {
-    "name": "Pre-alpha hardening",
-    "started": "_Cipher fills in_",
-    "ends": "_Cipher fills in_",
-    "goal": "_Cipher fills in_"
+    "name": "Infrastructure + Campaign launch",
+    "started": "2026-07-05",
+    "ends": "2026-07-12",
+    "goal": "Launch The Blind Spot campaign, get GoatCounter live, publish first blog post"
   },
   "build_progress": {
     "main_app": {
@@ -27,11 +27,21 @@
     "marketing_site": {
       "url": "https://www.certainid.io",
       "status": "live",
-      "notes": "Astro migration done; blog at /blog with 1 post live"
+      "notes": "Astro migration done; blog at /blog with 1 post live. Blind Spot post ready to publish (TASK-08)"
     },
     "browser_extension": {
       "status": "built, not in store",
       "notes": "Install-via-developer-mode only; Chrome Web Store submission outstanding"
+    }
+  },
+  "infrastructure": {
+    "goatcounter": {
+      "status": "running on VPS :8082, needs Caddy proxy",
+      "notes": "TASK-09 created for Caddy reverse proxy"
+    },
+    "essence_brain": {
+      "status": "306 entries, CLI search works",
+      "notes": "Indexed from Obsidian vault"
     }
   },
   "kpis": {
@@ -63,21 +73,30 @@
   ],
   "active_tasks": [
     {
-      "id": "TASK-01",
-      "slug": "hash-embedding",
-      "title": "Hash embedding / anti-deepfake floating badge",
-      "status": "brief-needed",
-      "priority": "P0"
+      "id": "TASK-08",
+      "slug": "publish-blindspot-blog",
+      "title": "Publish The Blind Spot blog post to certainid.io",
+      "status": "in-progress",
+      "priority": "P0",
+      "note": "Blog draft in artifacts/certainid-blog-biometric-blindspot.md. Was blocked by missing file — resolved now."
+    },
+    {
+      "id": "TASK-09",
+      "slug": "caddy-stats-proxy",
+      "title": "Add Caddy reverse proxy for stats.certainid.io",
+      "status": "pending",
+      "priority": "P0",
+      "note": "GoatCounter running on :8082. DNS live. Needs Caddy config."
     }
   ],
   "content_pipeline": {
     "blog_backlog": "see certainid-marketing/calendar/backlog.md",
     "blog_published_this_week": 0,
-    "next_post_target": "_Cipher tracks_"
+    "next_post_target": "The Blind Spot — ready to publish"
   },
   "social_queue": {
     "x": [],
     "linkedin": [],
-    "notes": "Cipher manages via Blotato API"
+    "notes": "Cipher manages via Blotato API. 7-day campaign scripts ready in Notion."
   }
 }
