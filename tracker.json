@@ -36,8 +36,8 @@
   },
   "infrastructure": {
     "goatcounter": {
-      "status": "running on VPS :8082, needs Caddy proxy (blocked: sudo access)",
-      "notes": "Claude Code can't access VPS. Gandelf7 needs to run one sudo command."
+      "status": "LIVE at stats.certainid.io 🟢",
+      "notes": "Caddy proxy added via admin API (no sudo needed). TLS working. Login: cipher@certainid.io"
     },
     "comms_officer": {
       "status": "LIVE — runs every 15min",
