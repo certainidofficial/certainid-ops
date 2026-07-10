@@ -1,0 +1,16 @@
+{
+  "name": "certainid-qa",
+  "version": "1.0.0",
+  "description": "Playwright E2E test suite for CertainID platform",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:enrollment": "npx playwright test tests/enrollment-flow.spec.js",
+    "test:content": "npx playwright test tests/content-signing.spec.js",
+    "test:social": "npx playwright test tests/social-linking.spec.js",
+    "test:verify": "npx playwright test tests/verify-badge.spec.js",
+    "report": "npx playwright show-report reports/"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.0"
+  }
+}
