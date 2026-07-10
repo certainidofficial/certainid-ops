@@ -1,4 +1,5 @@
 {
+<<<<<<< Updated upstream
   "_comment": "Cipher's structured ops tracker. Cipher owns this file.",
   "last_updated": "2026-07-07",
   "last_updated_by": "cipher",
@@ -7,12 +8,22 @@
     "started": "2026-07-05",
     "ends": "2026-07-12",
     "goal": "Launch The Blind Spot campaign, get GoatCounter live, publish first blog post"
+=======
+  "_comment": "Cipher's structured ops tracker. Updated from 6 completed TASK_DONE reports from June 17 session.",
+  "last_updated": "2026-06-18",
+  "last_updated_by": "cipher (re-sync from git log)",
+  "sprint": {
+    "name": "Pre-alpha hardening",
+    "started": "2026-06-17",
+    "ends": "alpha-ready (pending TASK-06 SQL migration + end-to-end smoke test)",
+    "goal": "Fix all 7 P0 council findings, ship TASK-01 hash badge, open alpha"
+>>>>>>> Stashed changes
   },
   "build_progress": {
     "main_app": {
       "url": "https://app.certainid.io",
       "status": "live",
-      "notes": "OAuth flows live for LinkedIn; GitHub/X/YouTube endpoints deployed, awaiting credentials"
+      "notes": "All 6 tasks deployed. Hash badge, ABI fix, URL fix, MetaMask copy, OAuth write fix, RLS endpoint — all live. TASK-06 SQL migration NOT YET RUN on Supabase (manual step for Gandelf7)"
     },
     "family_app": {
       "url": "https://family.certainid.io",
@@ -34,6 +45,7 @@
       "notes": "Install-via-developer-mode only; Chrome Web Store submission outstanding"
     }
   },
+<<<<<<< Updated upstream
   "infrastructure": {
     "goatcounter": {
       "status": "LIVE at stats.certainid.io 🟢",
@@ -48,6 +60,17 @@
       "notes": "Indexed from Obsidian vault"
     }
   },
+=======
+  "completed_tasks": [
+    {"id": "TASK-01", "title": "Hash embedding / holographic floating badge", "status": "DONE", "deployed": true, "deploy_url": "https://app.certainid.io", "done_at": "2026-06-17"},
+    {"id": "TASK-02", "title": "Fix ABI drift in deploy-identity.ts", "status": "DONE", "deployed": true, "done_at": "2026-06-17"},
+    {"id": "TASK-03", "title": "Fix verification URL to include contract address", "status": "DONE", "deployed": true, "done_at": "2026-06-17"},
+    {"id": "TASK-04", "title": "Fix MetaMask copy for Privy embedded wallet users", "status": "DONE", "deployed": true, "done_at": "2026-06-17"},
+    {"id": "TASK-05", "title": "Write verification_method/strength on OAuth return", "status": "DONE", "deployed": true, "done_at": "2026-06-17"},
+    {"id": "TASK-06", "title": "Tighten Supabase RLS on social_profiles UPDATE", "status": "DONE", "deployed": true, "sql_migration_pending": true, "done_at": "2026-06-17"}
+  ],
+  "active_tasks": [],
+>>>>>>> Stashed changes
   "kpis": {
     "alpha_users": 0,
     "blog_posts_published": 2,
@@ -57,6 +80,12 @@
   },
   "blockers": [
     {
+      "id": "TASK-06-SQL-MIGRATION",
+      "description": "TASK-06 code deployed but Supabase RLS migration SQL not yet run in Supabase Dashboard. Until run, old anon UPDATE policies still exist.",
+      "owner": "gandelf7",
+      "action": "Run certainid_ui/supabase-rls-task06.sql in Supabase SQL Editor"
+    },
+    {
       "id": "OAUTH-CREDS",
       "description": "Need Gandelf7 to register GitHub, Google, and X OAuth apps and provide client_id + secret for each",
       "blocks": ["full OAuth coverage on Profiles tab"],
@@ -64,11 +93,16 @@
     },
     {
       "id": "RELAYER-FUNDING",
+<<<<<<< Updated upstream
       "description": "Relayer wallet 0x9DF7Ccc1A560303520D138e14ef6bDD15f364249 at 0.2 MATIC",
+=======
+      "description": "Relayer wallet at 0.2 MATIC — enough for current cohort but not a second one",
+>>>>>>> Stashed changes
       "blocks": ["second alpha cohort"],
       "owner": "gandelf7"
     },
     {
+<<<<<<< Updated upstream
       "id": "CADDY-SUDO",
       "description": "Caddy proxy for stats.certainid.io needs sudo on VPS. Claude Code can't do it remotely.",
       "blocks": ["GoatCounter analytics live"],
@@ -91,6 +125,12 @@
       "status": "blocked",
       "priority": "P0",
       "note": "Claude Code clarified he can't access VPS. Needs Gandelf7 to run one sudo command."
+=======
+      "id": "COUNCIL-P1-ITEMS",
+      "description": "Council review identified ~20 P1 items (OAuth loading states, mobile PWA, rate limiting, etc.) for next sprint after alpha opens",
+      "owner": "cipher",
+      "deferred": true
+>>>>>>> Stashed changes
     }
   ],
   "agents": {
@@ -104,6 +144,21 @@
   "content_pipeline": {
     "blog_backlog": "see certainid-marketing/calendar/backlog.md",
     "blog_published_this_week": 1,
+<<<<<<< Updated upstream
     "next_post_target": "TBD — passkey adoption or Self Labs/Loam analysis"
+=======
+    "next_post_target": "not assigned"
+  },
+  "social_queue": {
+    "x": [],
+    "linkedin": [],
+    "notes": "Cipher manages via Blotato API"
+  },
+  "white_paper": {
+    "location": "~/.hermes/cache/white_paper.txt",
+    "date": "December 2025",
+    "status": "outdated — focuses on creator royalties/enterprise KYC. Needs rewrite to sovereign data + on-chain hash signing + anti-deepfake badge",
+    "action": "Rewrite needed (pending Gandelf7 steer on messaging)"
+>>>>>>> Stashed changes
   }
 }
