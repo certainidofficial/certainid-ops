@@ -5,6 +5,16 @@ Read [[START-HERE]] first.
 
 ---
 
+## 2026-08-13 — Shared brain moved into git (certainid-ops) for cross-machine sync
+
+- Topology realized: **Cipher = VPS**, **Claude Code = Mac 2**, **original Obsidian vault = Mac 1**. A local Mac folder can't be seen by the VPS or the other Mac, so the local-vault approach could never reach Cipher. **Git is the only shared substrate.**
+- Fix: copied `START-HERE.md` + `_Handoffs/` + `_Journal/` + `Dev/` into the **certainid-ops git repo** (which Cipher already has on the VPS) and pushed. Rule: `git pull` before reading, `git add -A && git commit && git push` after writing.
+- Seam still open (afternoon task): the Mac-local `CertainID-Vault` (where Cowork + Garry's Obsidian write) is still a SEPARATE store from the git repo; hand-synced for now. Proper fix = make the Mac vault git-backed (Obsidian Git plugin auto pull/push to the same repo) so all four read/write ONE git store, no manual sync.
+
+— claude-code · 2026-08-13 · cross-machine-brain
+
+---
+
 ## 2026-08-12 — Cowork onboarded to vault; Michael-email handoff closed (already sent, not drafted)
 
 - Cowork (me) is now wired into the shared vault: read `START-HERE.md`, journal, and `_Handoffs/` at session start; will journal + sign at session end going forward, per Garry's instruction.
