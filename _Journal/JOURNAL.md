@@ -5,6 +5,19 @@ Read [[START-HERE]] first.
 
 ---
 
+## 2026-08-13 — Consolidated Supabase onto MVP (one production), verified green
+
+- Root problem found: **TWO Supabase projects, crossed.** The live app used "CertainID Official" (`odszybuhotefjnafdbob`); Garry's schema + RLS work was all in "MVP" (`rapjczkdnnkhgrebrron`). So his edits never reached the running app — explains the old RLS-fix frustration and the waitlist confusion.
+- Decision (Garry): standardize on **MVP** (his full 13-table maintained schema; admin/service_role available). Keep CertainID Official as a **cold backup** (redundancy, not live-crossed).
+- Executed: repointed client `.env.production.local` + all 5 Vercel Supabase vars → MVP; redeployed. Backup of old env at `.env.production.local.bak.*`.
+- **VERIFIED green against MVP (not assumed):** bundle now uses MVP, old ref gone; waitlist signup via live API lands in MVP DB (read back with admin key); full enrolment session round-trip works with anon key (create → poll → phone update → desktop read → delete); RLS probe OK on all app write tables (only `beta_access` blocks anon insert, which is correct, and the gate is permissive anyway — "any authenticated user approved").
+- garry@keyview.com.au is NOT in MVP's waitlist → Garry gets his clean signup test. His old row stays orphaned in the retired CertainID Official.
+- **Open:** Garry to run a real phone enrolment on MVP as the final confirm. Welcome-email/CRM still to build (transactional email + verified domain). CertainID Official = cold backup, can delete later.
+
+— claude-code · 2026-08-13 · supabase-consolidation
+
+---
+
 ## 2026-08-13 — Shared brain moved into git (certainid-ops) for cross-machine sync
 
 - Topology realized: **Cipher = VPS**, **Claude Code = Mac 2**, **original Obsidian vault = Mac 1**. A local Mac folder can't be seen by the VPS or the other Mac, so the local-vault approach could never reach Cipher. **Git is the only shared substrate.**
@@ -76,3 +89,39 @@ Read [[START-HERE]] first.
 - Test content sign + verify in the live app; restart marketing (say "blockchain", not "Polygon").
 
 — claude-code · 2026-08-05 · session-state
+
+## 2026-08-13 — Waitlist pipeline planned; Brevo chosen for newsletters
+
+- Waitlist currently collects emails in Supabase only — no welcome email, no newsletter.
+- Decided on Brevo (Sendinblue) as the newsletter platform. Listmonk needs PostgreSQL (no sudo on VPS). Mautic admin panel locked.
+- Claude Code gets TASK-11: modify certainid_ui/api/waitlist.js to POST new signups to Brevo API.
+- Cipher to set up Brevo account, create welcome email template, provide API key.
+- CSIRO Kick-Start grant application drafted in Google Drive Grants folder.
+- X Week 1 social posts live/scheduled. LinkedIn Blotato connection expired.
+- Vault access established via ZeroTier SSH to Mac 2 (garrys-imac-2).
+
+— cipher · 2026-08-13 · waitlist-pipeline
+\nEOF
+## 2026-08-13 — Brand direction created; moved away from generic navy/indigo
+
+- Audited current brand: dark navy (#06080f), indigo accent, emerald secondary — Garry flagged as "AI slop" and he's right
+- Created Brand Direction with new palette: warm charcoal + signature gold (#A0926B) + Instrument Serif + Instrument Sans
+- Gold is distinctive in the identity/security space — signals premium trust, sovereign quality
+- Brand voice principles defined: warm, authoritative, clear, sovereign
+- Created brand direction doc + HTML visual reference in Drive (Brand folder)
+- Full brand guidelines with colors, typography, voice, imagery direction, words to use/avoid
+- Next: lock palette, create sigil mark, build Figma, apply to website
+
+— cipher · 2026-08-13 · brand-direction
+\nEOF
+## 2026-08-13 — Brand palette LOCKED: Deep Slate + Amber (Option C)
+
+- Garry reviewed 6 palette options side by side in a visual HTML mockup
+- Chose Option C: Deep slate (#0F111A) background + amber (#F59E0B) accent
+- Rationale: technical, precise, warm — sits in Stripe/Plaid territory
+- Brand guidelines v1 written and saved to Drive Brand folder
+- Next: sigil mark, Figma design system, website redesign, social templates
+- Also: TASK-11 pushed to git (waitlist pipeline), Brevo chosen for newsletters, Listmonk abandoned
+
+— cipher · 2026-08-13 · brand-locked
+\nEOF
