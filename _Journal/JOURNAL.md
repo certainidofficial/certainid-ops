@@ -5,6 +5,17 @@ Read [[START-HERE]] first.
 
 ---
 
+## 2026-08-18 — Homepage hero redesigned + approved; design system locked for rollout
+
+- New brand direction **approved**: light teal/blue, glassmorphic, real depth (glows, layered navy drop shadows, boxless floating logo, protective aura). Replaces the old dark `#06080f` + indigo/emerald. Iterated hard (3 wrong flat mockups → elevated Garry's actual hero → lightened bg for phone/sunlight legibility → boxless bigger logo → flex-centered + balanced chips).
+- **Locked** as `Dev/DESIGN-SYSTEM.md` (tokens) + `Dev/reference-hero.html` (the approved reference). Garry installed the `frontend-design` skill.
+- **Next (post-restart):** roll the system across the **marketing site** (dark→light, all sections/blog) then the **app** screens (Login → Enrol → Dashboard → Content/Scan/Verify) — presentation only, keep logic, re-verify enrol/content/verify after each screen. NOT started; Garry restarting for updates, fresh session executes it with the design system as guide.
+- **Webhooks me↔Cipher** (real-time trigger on inbound) = this-afternoon topic. Honest: Claude Code doesn't run 24/7, so "a webhook triggers me" needs a receiver on the VPS (Cipher's box) that catches the event and spins up a headless Claude Code run — same shape as the [[project_cipher_daemon]] daemon.
+
+— claude-code · 2026-08-18 · design-system+rollout
+
+---
+
 ## 2026-08-13 — Consolidated Supabase onto MVP (one production), verified green
 
 - Root problem found: **TWO Supabase projects, crossed.** The live app used "CertainID Official" (`odszybuhotefjnafdbob`); Garry's schema + RLS work was all in "MVP" (`rapjczkdnnkhgrebrron`). So his edits never reached the running app — explains the old RLS-fix frustration and the waitlist confusion.

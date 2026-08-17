@@ -14,7 +14,8 @@ Owners: **cc** = Claude Code (build), **cw** = Cowork (comms/marketing/Blotato),
 - Waitlist → welcome email + hello@ notification, live via Resend.
 
 ## Phase 1 — Launch-blocking polish (this week)
-- [ ] **Homepage redesign** — futuristic, drop the dark-blue/indigo. Mock 2-3 directions, Garry picks, build winner. — **cc**
+- [x] **Homepage hero redesign** — APPROVED (light teal/blue, glassmorphic). Reference: `Dev/reference-hero.html` + `Dev/DESIGN-SYSTEM.md`. — **cc**
+- [ ] **Roll the design system everywhere** — marketing site (dark→light, all sections/blog) then the app screens; presentation only, re-verify app flows. Per `Dev/DESIGN-SYSTEM.md`. (post-restart) — **cc**
 - [ ] **Welcome email + waitlist UI polish** — proper branded email, cleaner success screen. — **cc**
 - [ ] **DMARC record** in Cloudflare (`_dmarc` TXT `v=DMARC1; p=none; rua=mailto:hello@certainid.io; fo=1`) — deliverability. — **g**
 - [ ] **Final phone enrolment run on MVP** — the last foundation confirm. — **g**
