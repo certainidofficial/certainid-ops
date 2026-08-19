@@ -53,7 +53,15 @@ Waitlist Signup (Supabase)
     │
     ▼
 ┌────────────────────────────────────────────────────────────┐
-│  CRON 2: VC research + outreach                            │
+│  CRON 2: Social media management                           │
+│  Schedule: Daily (15 min AM, 15 min PM)                    │
+│  Action: Like posts, reply to DMs, engage with ICPs        │
+│  Owner: Cipher (via Blotato + X API)                       │
+└────────────────────────────────────────────────────────────┘
+    │
+    ▼
+┌────────────────────────────────────────────────────────────┐
+│  CRON 3: VC research + outreach                            │
 │  Schedule: Daily research, weekly outreach                 │
 │  Action: Research investors, draft outreach email          │
 │  Owner: Cipher (research + draft) + Garry (approve/send)   │
@@ -81,20 +89,29 @@ Waitlist Signup (Supabase)
 
 ---
 
-## Day 2: CRM + Retention
+## Day 2: Social + CRM + Retention
 
-### Step 4 — CRM (Cipher)
+### Step 4 — Social Media Management (Cipher)
+- [ ] **Daily engagement cadence:** 15 min AM, 15 min PM
+  - Like 5-10 posts from ICPs/industry leaders (X + LinkedIn)
+  - Reply to DMs (Blotato handles X DMs, LinkedIn via API)
+  - Comment on 2-3 relevant posts with value-add
+  - Send 3-5 connection requests (LinkedIn, personalized note)
+- [ ] Script: `social-engagement.py` runs on cron, surfaces suggested interactions
+- [ ] Cipher drafts replies, schedules via Blotato
+
+### Step 5 — CRM (Cipher)
 - [ ] Create CRM tracking in vault `_CRM/` folder
 - [ ] Each subscriber gets a markdown file: name, email, signup date, status, notes
 - [ ] Webhook: Brevo subscriber → CRM entry created
 
-### Step 5 — Follow-up Drip (Cipher)
+### Step 6 — Follow-up Drip (Cipher)
 - [ ] Write Day 3 email: "Try the app"
 - [ ] Write Day 7 email: "Alpha features"
 - [ ] Write Day 14 email: "Feedback request"
 - [ ] Cron job: check signups, send applicable emails
 
-### Step 6 — Customer Service (Cipher + Nova)
+### Step 7 — Customer Service (Cipher + Nova)
 - [ ] Nova already scans Gmail inbox every 15 min
 - [ ] If email is from a subscriber → flag as "support"
 - [ ] Cipher drafts response → Garry approves → sends
@@ -158,6 +175,7 @@ Waitlist Signup (Supabase)
 |---|---|---|---|
 | Welcome email | Write copy, send via Gmail | Supabase webhook → VPS | Approve email |
 | Newsletter | Brevo setup, API key | — | — |
+| Social media | Daily engagement, DMs, likes | — | — |
 | CRM | Build tracker, wire webhook | — | — |
 | Retention drip | Write emails, cron | — | — |
 | Customer service | Draft responses | — | Approve responses |
