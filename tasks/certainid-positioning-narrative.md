@@ -90,6 +90,17 @@ To be ready:
 
 ---
 
+## Patent Positioning (Updated 2026-08-31)
+
+Patents are backstory, not headline. Financials constrain renewal, not patent value. The timeline shield still works — if someone else buys them, they can't retroactively block us.
+
+**How we talk about them:**
+"Built on deep technical foundations including the Atherton/MIKOH patent families. Those patents shaped the architecture. We're in active discussions with the patent holders."
+
+Not front and center. Mentioned as part of what helped us build the product.
+
+---
+
 ## Key Phrases
 
 - **"Your face should verify you. Not a bank."**
