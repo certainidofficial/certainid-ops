@@ -100,16 +100,24 @@ Engagement Agent (social DMs, likes, comments — auto)
 
 ## Narrative (Key View Digital → CertainID)
 
+**Updated 2026-08-31:** Patents are backstory, not headline. Financials constrain renewal, not patent value. They still protect us as a timeline shield. Lead with the working product; patents are part of what helped us build it.
+
 **Key View Digital** — "Your data. Your server. Your control. Sovereign data infrastructure."
      ↓
-**CertainID** — "Your face verifies you. Not a bank. Not a government server. On-device biometrics, blockchain proof."
+**CertainID** — "Your face verifies you. Not a bank. Not a government server. On-device biometrics, blockchain proof. Live on Base mainnet."
      ↓
 **Authentic content** — "Cryptographically signed by the creator. Verifiable by anyone. Permanently on-chain."
+
+**How we talk about the patents:**
+- "Built on deep technical foundations including the Atherton/MIKOH patent families. Those patents shaped the architecture. We're in active discussions with the patent holders."
+- NOT front and center. Mentioned as backstory, not headline.
+- The timeline shield still works — if someone else buys them, they can't retroactively block us.
 
 **Key phrases:**
 - "Your face should verify you. Not a bank."
 - "The only database that can't be breached is the one that doesn't exist."
 - "Sovereign data lives where you control it. Not on a third-party server."
+- "Working product. Live on Base mainnet. Built on deep technical foundations."
 
 ---
 
