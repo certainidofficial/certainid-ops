@@ -100,7 +100,7 @@ Engagement Agent (social DMs, likes, comments — auto)
 
 ## Narrative (Key View Digital → CertainID)
 
-**Updated 2026-08-31:** Patents are backstory, not headline. Financials constrain renewal, not patent value. They still protect us as a timeline shield. Lead with the working product; patents are part of what helped us build it.
+**Updated 2026-09-12:** US patents renewed through 2030 (Atherton/MIKOH family). Patents are backstory, not headline — strategic choice, not reactive. They protect us as a timeline shield. Lead with the working product; patents are part of the foundation.
 
 **Key View Digital** — "Your data. Your server. Your control. Sovereign data infrastructure."
      ↓
