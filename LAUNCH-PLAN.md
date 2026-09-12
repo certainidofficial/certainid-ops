@@ -125,16 +125,18 @@ Engagement Agent (social DMs, likes, comments — auto)
 
 | What | Who | Status |
 |---|---|---|
-| Design rollout | cc | ❌ Not started |
+| Design rollout | cc | ❌ Not started — Claude sub needed |
 | Welcome email fix | cc/g | ⚠️ Built, test bounced |
 | Webhook receiver | ci | ❌ Not built |
 | Brevo + CRM | ci | ❌ Not built |
 | Follow-up drip copy | ci | ❌ Not written |
-| Engagement (DMs, likes) | ci | ❌ Not built |
+| Engagement (DMs, likes) | ci | ❌ Not built — needs X API keys |
 | Blotato posting | ci | ✅ 3 posts live |
 | LinkedIn re-auth | g | ❌ Expired |
 | Blog + YouTube | ci/cw | ❌ Not started |
 | DMARC in Cloudflare | g | ❌ Not set |
+| **Council gap analysis** | **cc** | **❌ New — TASK-14** |
+| **Scan tool completion** | **cc** | **❌ New — TASK-14** |
 
 ---
 
