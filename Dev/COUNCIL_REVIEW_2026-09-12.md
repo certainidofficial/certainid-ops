@@ -138,10 +138,10 @@ Covered in detail above. **Upload and Camera paths work; Paste-a-URL is the brok
 
 | # | Severity | Where | Issue | Status |
 |---|----------|-------|-------|--------|
-| 1 | P0 | `ScanTab.tsx:148-176` | "Paste a URL" silently hashes the URL string on CORS/fetch failure, producing confident-but-wrong "not verified" for real signed content. | **Open** |
-| 2 | P0 | `Enrollment.tsx:312-330` | Header back arrow only steps back on step 1; on steps 2-4 it silently disconnects and discards all enrollment progress. | **Open** |
-| 3 | P1 | `BetaGate.tsx:132-136` + `useWallet.ts:96` | Wallet-only Privy login never has an email, so allowlist check permanently shows "You're on the list" for that path regardless of actual status. | **Open** |
-| 4 | P1 | `BiometricGate.tsx:174-194` | No escape hatch (sign out / open in browser) when WebAuthn unlock fails on the installed PWA. | **Open** |
+| 1 | P0 | `ScanTab.tsx:148-176` | "Paste a URL" silently hashes the URL string on CORS/fetch failure, producing confident-but-wrong "not verified" for real signed content. | **Deprioritized** — Garry's pivoted go-to-market to "digital ownership," not scanning, this phase. Still open, not urgent. |
+| 2 | P0 | `Enrollment.tsx:312-330` | Header back arrow only steps back on step 1; on steps 2-4 it silently disconnects and discards all enrollment progress. | **Fixed** — deployed live. Step 2 now steps back cleanly; steps 3-4 hide the back arrow (in-flight/complete tx can't be abandoned). |
+| 3 | P1 | `BetaGate.tsx:132-136` + `useWallet.ts:96` | Wallet-only Privy login never has an email, so allowlist check permanently shows "You're on the list" for that path regardless of actual status. | **Fixed** — deployed live. Distinct message now tells the user to sign out and use email instead. |
+| 4 | P1 | `BiometricGate.tsx:174-194` | No escape hatch (sign out / open in browser) when WebAuthn unlock fails on the installed PWA. | **Fixed** — deployed live. "Continue in browser instead" (bypasses standalone-mode enforcement) + support email added. |
 | 5 | P2 | `ContentTab.tsx:157-159` vs. `useContentSigning.ts:58` | `captionUrl` and the sign transaction can read different contract-address sources, producing a hash-only link. | **Fixed** (VerifyContent.tsx now resolves hash-only links via Supabase; structurally closed) |
 | 6 | P2 | `ScanTab.tsx:239-241` | Copy oversells "Paste a URL" support beyond what the tool can resolve. | Open |
 | 7 | P2 | `DocumentCapture.tsx:106-117` | Front+back ID docs via phone QR path only bind front-image hash; desktop path hashes both. Inconsistent. | Open |
