@@ -7,7 +7,7 @@ Good news: you don't need VPS credentials. The receiver side of the webhook rela
 ## The endpoint
 
 ```
-POST http://10.35.94.251:8644/webhooks/agent-intake
+POST http://10.35.94.251:8646/webhooks/agent-intake
 Content-Type: application/json
 ```
 
