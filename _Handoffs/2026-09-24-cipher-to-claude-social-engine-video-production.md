@@ -28,7 +28,27 @@ Digital ownership papers. Not borrowed. Not rented. Yours."
 4. Garry should be able to iterate: new script → new video without manual rework
 
 ### fal.ai API key
-Garry has it. You'll need to ask him where it lives or set it as a Vercel env var.
+Key: `fal_sk_8bdab2e1df7c4ddfbe806e14b1722d73:0590755041b7154c25b6d9b1c1c87e14`
+Garry gave it to Cipher for relay. Set it as a Vercel env var (`FAL_API_KEY` or `FAL_KEY`) so the backend can use it. Tested — key is active, 100+ models available.
+
+### Available fal.ai models for the pipeline
+These are confirmed working with the key:
+
+**Base image generation (create the avatar look):**
+- `fal-ai/nano-banana-2` or `fal-ai/nano-banana-pro` — text-to-image for generating the avatar/base image
+- Style prompt: "realistic professional presenter, futuristic style, clean background, photorealistic"
+
+**Video / avatar animation:**
+- `fal-ai/kling-video/ai-avatar/v2/standard` — **Kling AI Avatar v2** → creates avatar videos with realistic humans. Best fit for the "digital avatar" requirement.
+- `fal-ai/sync-lipsync/v3` — sync-3 Lipsync → professional quality mouth sync with audio
+- `minimax/h3-max/lip-sync/image-to-video` — H3 Max Lip Sync → takes an image + audio, generates talking video
+- `fal-ai/bytedance/omnihuman/v1.5` — Omnihuman → video from a human image
+- `bytedance/seedance-2.5/image-to-video` — 30-second clips at 720p
+
+**Recommended pipeline:**
+1. Nano Banana 2 → generate base avatar image (futuristic presenter)
+2. Kling AI Avatar v2 OR H3 Max Lip Sync → animate with TTS audio of the script
+3. Output in 9:16 vertical for TikTok/Reels + 16:9 horizontal for X/LinkedIn
 
 ---
 
