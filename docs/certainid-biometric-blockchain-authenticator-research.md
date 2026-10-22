@@ -216,6 +216,30 @@ Enterprise pays first (higher willingness to pay, compliance-driven). Consumer b
 4. **R3 smart contract architecture** — existing CertainID blockchain capability assessment
 5. **Go-to-market friction analysis** — enterprise vs consumer, cost of acquisition
 
+## 8. Blockchain Strategy — Two-Phase Approach (Decision: 2026-10-19)
+
+**Decision:** Build on **Base as phase 1** (everything is already built there), pursue a **custom blockchain as phase 2**.
+
+### Phase 1 — Base (now)
+- Deploy the attestation contracts on Base
+- Zero-to-near-zero gas costs (median ~$0.001, typical under $0.01 per attestation)
+- EIP-712 off-chain attestations for high-frequency auth (zero gas), on-chain anchoring for compliance/audit
+- Batch attestations to minimise per-verification cost at scale
+
+### Phase 2 — Custom chain (later)
+- Fork via Cosmos SDK or Polygon CDK (or similar framework) to get:
+  - Sovereign gas model — zero/near-zero transaction costs by design
+  - Protocol-level privacy (encrypted state, ZK proofs) — not app-layer privacy promises
+  - Consensus-level revocation enforcement — user says "delete my data," chain enforces it
+  - No dependency on external chain governance or fee markets
+- Decision deferred to weekend discussion with Claude
+
+### Open questions for weekend discussion (Cipher + Claude + Garry)
+- **Wallet integration:** How does the custom chain interact with MetaMask, Ledger, and the broader wallet ecosystem? Does it need to be EVM-compatible for wallets to recognise it, or do we ship our own wallet?
+- **Interop:** IBC (Cosmos) vs zk-bridge (Polygon CDK) — does the custom chain need to talk to Ethereum/Base, or can it stand alone?
+- **Validator economics:** Who runs validators? Self-run sovereign set, or delegated?
+- **Migration path:** What carries over from Base when phase 2 launches (contract addresses, attestation history, DIDs)?
+
 ---
 
 *This document is a research frame, not a build spec. Each R1-R7 item needs its own deep-dive before we commit to architecture. The goal of the research phase is to validate the feasibility and identify the critical path to a minimal shippable authenticator.*
