@@ -35,6 +35,29 @@ A **biometric, blockchain-verifiable authenticator** that replaces passwords and
 ### Alpha launch framing
 The alpha product = the ownership/attestation layer for client profiles. The authenticator is the key-holder; the smart contract is the notary; the client holds the deed. **The password manager (Section 2, Market 2) builds on top of this same infrastructure** — same key, same contract pattern, same sovereign model.
 
+**Alpha verticals (same product, different assets being owned):**
+- **Social profiles** — X, LinkedIn, Instagram, Facebook, TikTok, websites, marketplaces
+- **GitHub / software supply chain** — repos, plugins, mods, skills, extensions. The verified human behind the repo, ownership paper on-chain, and per-plugin attestation ("this plugin came from the verified owner of that repo") so users can scan authenticity before install. GPG proves a key signed a commit; CertainID proves a real person owns the key. **This is the highest-urgency vertical** — supply-chain attacks are the #1 security exposure in software today, and every dev already feels the "should I trust this?" pain. Developers are also the fastest adopters: accounts exist, tech understood, pain acute.
+
+---
+
+## 1b. The Authentication Flow (Ownership Attestation, All Verticals)
+
+The same flow for every asset — profile, repo, plugin, domain:
+
+```
+1. OWNER signs in to the asset (profile / repo / account) through CertainID
+2. Biometric capture + liveness (on-device, sovereign — no biometric ever leaves)
+3. Match against local template → owner verified
+4. SDK signs a control claim with the owner's device-bound key:
+   "verified human [DID 0x…] controls [asset @handle / github.com/owner/repo]"
+5. Smart contract records the ownership paper (revocable only by owner signature)
+6. Anyone can verify: query the contract → "is this asset controlled by a verified
+   human, and is the current publisher that human?"
+```
+
+No platform API, no platform permission, no platform blessing. **Ownership is proven by control (the biometric sign-in); the contract is the notary; the platform is just the thing being owned.**
+
 ---
 
 ## 2. Two-Market Positioning
