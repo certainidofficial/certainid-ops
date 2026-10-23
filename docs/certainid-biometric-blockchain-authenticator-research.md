@@ -13,6 +13,30 @@ A **biometric, blockchain-verifiable authenticator** that replaces passwords and
 
 ---
 
+## 1a. The Origin Use-Case — Digital Ownership & Deepfake Mitigation (Client Profiles)
+
+**This was the original CertainID idea, and it remains the alpha-launch product.** It is the reason the authenticator and the white paper exist.
+
+### The problem
+- People and businesses own digital profiles (X, LinkedIn, Instagram, websites, marketplaces) but have **no way to cryptographically prove ownership** of them
+- Anyone can copy a face, a voice, a brand — deepfakes and impersonation are cheap
+- When a profile is attacked, there is no authoritative record of "this is the real owner" and "this content did/did not come from that owner"
+
+### The CertainID model (three pillars, strictly applied)
+1. **The key ALWAYS remains with the client.** CertainID never holds private keys. Never. No escrow, no custodianship, no central vault.
+2. **The key + profile ownership claim are logged to a smart contract the client owns.** The on-chain record is the **digital ownership paper**: "profile @handle is bound to DID 0x…, owned by verified human [name], attested at issuance and revocable only by the owner's signature."
+3. **Everything private stays on the client's device; the chain never sees secrets** — it sees public keys, DID references, and signed claims only.
+
+### What it delivers
+- **Digital ownership papers** — cryptographically provable, tamper-evident proof that a profile is theirs and what that profile published. Print it, show it in court, attach it to a sale.
+- **Deepfake mitigation** — content signed by the owner's key carries verifiable provenance. A video or post from "their" profile can be checked against the chain: did the verified owner's key sign this? Yes = authentic. No/absent = flagged.
+- **Profile locking & transfer** — ownership is on-chain, so control moves with the key, not with platform account recovery. Revocation kills the attestation, not just the password.
+
+### Alpha launch framing
+The alpha product = the ownership/attestation layer for client profiles. The authenticator is the key-holder; the smart contract is the notary; the client holds the deed. **The password manager (Section 2, Market 2) builds on top of this same infrastructure** — same key, same contract pattern, same sovereign model.
+
+---
+
 ## 2. Two-Market Positioning
 
 ### Market 1: Enterprise / Government (CertainID core)
